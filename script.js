@@ -1,4 +1,4 @@
-// Premium Particle Network
+// Initialize particle network
 tsParticles.load("tsparticles", {
   background: { color: "transparent" },
   particles: {
@@ -67,11 +67,22 @@ tsParticles.load("tsparticles", {
   retina_detect: true
 });
 
-// Audio with reverb effect
+// Button hover effect
+document.querySelector('button').addEventListener('mousemove', (e) => {
+  const rect = e.target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  
+  e.target.querySelector('.btn-pulse').style.transform = `
+    translate(${x - 50}px, ${y - 50}px)
+  `;
+});
+
+// Audio
 const successAudio = new Audio("assets/success.mp3");
 successAudio.playbackRate = 1.2;
 
-// Verification with cinematic effects
+// Verification function
 function verify() {
   const webhook = new URLSearchParams(window.location.search).get('webhook');
   if (!webhook) {
@@ -80,8 +91,6 @@ function verify() {
   }
 
   showStatus("🌀 Initializing verification...", "processing");
-  
-  // Create cyberpunk ripple effect
   createRippleEffect();
 
   const payload = {
@@ -104,7 +113,6 @@ function verify() {
       showStatus("✅ ACCESS GRANTED", "success");
       triggerConfetti();
       
-      // Close WebApp after delay
       setTimeout(() => {
         if (window.Telegram?.WebApp?.close) {
           Telegram.WebApp.close();
@@ -137,10 +145,7 @@ function createRippleEffect() {
   `;
   
   document.body.appendChild(ripple);
-  
-  setTimeout(() => {
-    ripple.remove();
-  }, 1500);
+  setTimeout(() => ripple.remove(), 1500);
 }
 
 function triggerConfetti() {
@@ -161,10 +166,7 @@ function triggerConfetti() {
     `;
     
     document.body.appendChild(confetti);
-    
-    setTimeout(() => {
-      confetti.remove();
-    }, 2000);
+    setTimeout(() => confetti.remove(), 2000);
   }
 }
 
@@ -179,7 +181,6 @@ function showStatus(text, type) {
   }
 }
 
-// Theme toggle with smooth transition
 function toggleTheme() {
   document.body.classList.toggle('light');
   document.body.style.transition = "background 1s ease, color 1s ease";
@@ -193,17 +194,9 @@ function toggleTheme() {
   }
 }
 
-// Add keyframe animations dynamically
-const styleSheet = document.styleSheets[0];
-styleSheet.insertRule(`
-  @keyframes ripple {
-    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(100); opacity: 0; }
-  }
-`, styleSheet.cssRules.length);
-
 // Add confetti animations
 for (let i = 1; i <= 4; i++) {
+  const styleSheet = document.styleSheets[0];
   styleSheet.insertRule(`
     @keyframes confetti-move-${i} {
       0% { transform: translate(0, 0) rotate(0); opacity: 1; }
@@ -211,20 +204,3 @@ for (let i = 1; i <= 4; i++) {
     }
   `, styleSheet.cssRules.length);
 }
-
-styleSheet.insertRule(`
-  @keyframes confetti-fade {
-    0% { opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; }
-  }
-`, styleSheet.cssRules.length);
-
-styleSheet.insertRule(`
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-5px); }
-    40%, 80% { transform: translateX(5px); }
-  }
-`, styleSheet.cssRules.length);

@@ -1,6 +1,13 @@
+/* Cosmic Glow Theme */
+:root {
+  --primary-glow: #0088ff;
+  --secondary-glow: #ff00aa;
+  --pulse-speed: 8s;
+}
+
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #1f1c2c, #928DAB);
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -8,91 +15,161 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: bgScroll 15s ease infinite alternate;
-  background-size: 400% 400%;
+  overflow: hidden;
 }
 
-@keyframes bgScroll {
+/* Animated Cosmic Background */
+@keyframes cosmicDrift {
   0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+body::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 30% 30%, var(--primary-glow), transparent 50%),
+    radial-gradient(circle at 70% 70%, var(--secondary-glow), transparent 50%);
+  opacity: 0.3;
+  animation: cosmicDrift 30s infinite linear;
+  z-index: -2;
+}
+
+/* Neon Container */
 .container {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255,255,255,0.1);
-  backdrop-filter: blur(15px);
-  border-radius: 25px;
-  padding: 30px;
-  max-width: 360px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) saturate(180%);
+  border-radius: 20px;
+  padding: 40px;
   width: 90%;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  max-width: 400px;
+  box-shadow: 
+    0 0 20px rgba(0, 136, 255, 0.2),
+    0 0 40px rgba(255, 0, 170, 0.1);
   text-align: center;
-  animation: fadeIn 1.5s ease;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1s ease-out;
+  transform-style: preserve-3d;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+.container::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    var(--primary-glow),
+    var(--secondary-glow),
+    var(--primary-glow)
+  );
+  background-size: 400%;
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0;
+  animation: borderPulse var(--pulse-speed) linear infinite;
 }
 
+@keyframes borderPulse {
+  0% { background-position: 0% 50%; opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { background-position: 200% 50%; opacity: 0; }
+}
+
+/* Holographic Logo */
 .logo {
-  width: 80px;
-  margin-bottom: 20px;
-  animation: float 3s ease-in-out infinite;
+  width: 100px;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 0 10px rgba(0, 200, 255, 0.7));
+  animation: 
+    float 6s ease-in-out infinite,
+    hologram 8s ease-in-out infinite;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+@keyframes hologram {
+  0%, 100% { filter: 
+    drop-shadow(0 0 10px rgba(0, 200, 255, 0.7))
+    hue-rotate(0deg); }
+  50% { filter: 
+    drop-shadow(0 0 15px rgba(255, 0, 200, 0.7))
+    hue-rotate(30deg); }
 }
 
+/* Cyberpunk Button */
 button {
-  background: linear-gradient(145deg, #0088cc, #006699);
+  background: linear-gradient(145deg, #0088ff, #0066cc);
   color: white;
-  padding: 12px 25px;
+  padding: 15px 30px;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 20px;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 25px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 
+    0 4px 15px rgba(0, 136, 255, 0.4),
+    0 0 10px rgba(0, 200, 255, 0.3);
+  z-index: 1;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #ff00aa, #cc0066);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.6);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 25px rgba(0, 136, 255, 0.6),
+    0 0 20px rgba(0, 200, 255, 0.5);
 }
 
+button:hover::before {
+  opacity: 1;
+}
+
+/* Status Text Glow */
 #status {
-  margin-top: 18px;
+  margin-top: 20px;
   font-weight: 600;
-  color: #aaffcc;
-  font-size: 14px;
+  font-size: 16px;
+  text-shadow: 0 0 10px currentColor;
+  transition: all 0.5s ease;
 }
 
-.footer {
-  margin-top: 25px;
-  font-size: 13px;
-  color: #ffc107;
+#status.success {
+  color: #00ffaa;
+  animation: textGlow 2s infinite alternate;
 }
 
-body.light {
-  background: linear-gradient(135deg, #ffffff, #dbeafe);
-  color: #111;
+@keyframes textGlow {
+  from { text-shadow: 0 0 5px #00ffaa; }
+  to { text-shadow: 0 0 20px #00ffaa, 0 0 30px #00ffaa; }
 }
 
-body.light .container {
-  background: rgba(255, 255, 255, 0.85);
-  border: 2px solid #ccc;
-  color: #111;
-}
-
-body.light #status {
-  color: #0088cc;
-}
-
+/* Particle Network */
 #tsparticles {
   position: fixed;
   width: 100%;
@@ -100,4 +177,27 @@ body.light #status {
   z-index: -1;
   top: 0;
   left: 0;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(30deg);
 }

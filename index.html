@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TON Verification</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TON Global Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="tsparticles"></div>
   <div class="container">
-    <img src="assets/ton-logo.png" alt="TON Logo" class="logo" />
-    <h1>Human Verification</h1>
-    <p>Click below to prove you're not a robot</p>
-    <button onclick="verify()">✅ Verify Now</button>
+    <img src="assets/ton-logo.png" alt="TON Logo" class="logo">
+    <h1>GLOBAL VERIFICATION</h1>
+    <p>Prove your humanity to continue</p>
+    <button onclick="verify()">
+      <span class="btn-text">ACTIVATE VERIFICATION</span>
+      <span class="btn-pulse"></span>
+    </button>
     <div id="status"></div>
+    
     <div class="footer">
-      <button onclick="toggleTheme()">🌓 Toggle Theme</button>
+      <button onclick="toggleTheme()" class="theme-btn">
+        <span class="theme-icon">🌓</span> TOGGLE MATRIX
+      </button>
+      
+      <div class="credit">
+        <div class="credit-inner">
+          <span class="magic-text">CRAFTED BY</span>
+          <span class="signature">𝔓𝔯𝔢𝔪𝔦𝔲𝔪 𝔇𝔲𝔫𝔤𝔢𝔬𝔫</span>
+          <div class="credit-glow"></div>
+        </div>
+      </div>
     </div>
   </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

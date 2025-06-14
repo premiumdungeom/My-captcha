@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ton Bot Global Verification</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="tsparticles"></div>
   <div class="container">
-    <img src="assets/ton-logo.png" alt="TON Logo" class="logo">
+    <img src="assets/ton-logo.png" alt="TON Logo" class="logo" />
     <h1>Ton Bot Global</h1>
-    <p>Click below to verify you're not a robot</p>
-    <label><input type="checkbox" id="vpnToggle"> Simulate VPN usage</label>
+    <p>Click the button below to prove you are human</p>
     <button onclick="verify()">✅ I'm not a robot</button>
     <div id="status"></div>
+    <div class="footer">
+      <button onclick="toggleTheme()">🌓 Toggle Theme</button><br/>
+      MADE BY PRO: <span class="credit">𝔓𝔯𝔢𝔪𝔦𝔲𝔪 𝔇𝔲𝔫𝔤𝔢𝔬𝔫</span>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
